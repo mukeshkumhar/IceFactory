@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/login_background">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewRecycle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10sp"
+        app:cardCornerRadius="10sp"
+        android:background="@drawable/edittext_background">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="5sp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/recycleFullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="fullName"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/recycleEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:padding="1sp"
+                android:text="Email"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

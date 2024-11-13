@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterPage">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ice1"
+        android:scaleType="centerCrop"
+        android:tint="#4DFFFFFF"
+
+        />
+    <TextView
+        android:id="@+id/errorTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="* you are allready Register *"
+        android:textColor="#FF0000"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/loginCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.867" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/loginCard"
+        android:layout_width="match_parent"
+        android:layout_height="600sp"
+        android:layout_margin="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="@color/loginbgColour"
+        android:backgroundTint="#CDDEF2F1"
+        app:cardCornerRadius="10sp"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10sp"
+                android:text="Sri Dakshinamurthy Ice Factory"
+                android:textColor="#0BB4F4"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="15sp"
+                android:text="Register"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
+                android:textColor="@color/black"
+                android:text="Name" />
+
+            <EditText
+                android:id="@+id/registerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/textHintColour"
+                android:background="@drawable/edittext_background"
+                android:hint="Enter your Name"
+                android:minHeight="48dp"
+                android:padding="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
+                android:textColor="@color/black"
+                android:text="Email" />
+
+            <EditText
+                android:id="@+id/registerEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/textHintColour"
+                android:background="@drawable/edittext_background"
+                android:hint="Enter your email"
+                android:minHeight="48dp"
+                android:padding="10sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
+                android:textColor="@color/black"
+                android:text="Password" />
+
+            <EditText
+                android:id="@+id/registerPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15sp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/textHintColour"
+                android:background="@drawable/edittext_background"
+                android:hint="Enter your password"
+                android:minHeight="48dp"
+                android:padding="10sp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/registerButton"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25sp"
+                android:background="@drawable/button_background"
+                android:elevation="5dp"
+                android:text="Register"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/logintext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:layout_marginTop="10sp"
+                android:text="If you are allready register then" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/loginPagebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5sp"
+                android:background="@drawable/button_background"
+                android:text="login"
+                android:textSize="15sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

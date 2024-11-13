@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".Billings">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:background="@drawable/header_bar_background"
+        app:cardBackgroundColor="@color/headerColour"
+        app:cardCornerRadius="0sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/backBTN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10sp"
+            android:background="#00FFFFFF"
+            android:contentDescription="Home"
+
+            android:src="@drawable/back_btn"
+            tools:ignore="TouchTargetSizeCheck" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Billings"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:layout_gravity="center"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
+            android:layout_marginTop="20sp"
+            android:layout_marginRight="10sp"
+            android:layout_gravity="end"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/logoutBtn"
+                android:layout_width="60sp"
+                android:layout_height="25sp"
+                android:background="#00FFFFFF"
+                android:text="Logout"
+                android:textStyle="bold"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/logoutbtn"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:textSize="16sp"-->
+            <!--                android:text="Logout"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textStyle="bold" />-->
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/logout_btn" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.0">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/loginbgColour"
+            android:layout_margin="8sp"
+            app:cardCornerRadius="10sp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20sp"
+                android:orientation="vertical">
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginLeft="20sp"-->
+<!--                    android:textSize="18sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:text="Search"/>-->
+
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10sp"-->
+<!--                    app:cardCornerRadius="30sp"-->
+<!--                    >-->
+<!--                    <androidx.appcompat.widget.SearchView-->
+<!--                        android:id="@+id/searchTxt"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="5sp"/>-->
+<!--                </androidx.cardview.widget.CardView>-->
+                <TextView
+                    android:id="@+id/emailOfBilling"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginBottom="10sp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="email"/>
+
+<!--                <androidx.cardview.widget.CardView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10sp"-->
+<!--                    app:cardCornerRadius="30sp"-->
+<!--                    >-->
+<!--                    <androidx.appcompat.widget.SearchView-->
+<!--                        android:id="@+id/searchTxt"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        app:queryBackground="@android:color/transparent"-->
+<!--                        app:queryHint="Enter to search"-->
+<!--                        app:iconifiedByDefault="false"-->
+<!--                        android:padding="5sp"/>-->
+<!--                </androidx.cardview.widget.CardView>-->
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycleViewBilling"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="1"
+                    android:layout_margin="5sp"
+                    tools:listitem="@layout/customer_layout_recycleview"
+                    tools:orientation="vertical" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20sp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/startDateTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:textColor="@color/black"
+                            android:text="Start Date"/>
+
+                        <DatePicker
+                            android:id="@+id/startDatePicker"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:theme="@style/ThemeOverlay.AppCompat.Light"
+                            android:calendarTextColor="@color/headerColour"
+                            android:calendarViewShown="false"
+                            android:datePickerMode="spinner"
+                            style="@style/MyDatePickerSpinnerStyle"
+                            android:visibility="visible" />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textEnd"
+                        android:layout_margin="20sp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/endDateTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:text="End Date"/>
+
+
+
+                        <DatePicker
+                            android:id="@+id/endDatePicker"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/ThemeOverlay.AppCompat.Light"
+                            android:layout_weight="1"
+                            android:datePickerMode="spinner"
+                            android:visibility="visible"
+                            android:calendarTextColor="@color/headerColour"
+                            style="@style/MyDatePickerSpinnerStyle"
+                            android:calendarViewShown="false"/>
+
+                    </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/exportBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Export Pdf"
+        android:textSize="15sp"
+        android:paddingStart="20sp"
+        android:paddingEnd="20sp"
+        android:background="@drawable/button_background"
+        android:layout_marginBottom="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

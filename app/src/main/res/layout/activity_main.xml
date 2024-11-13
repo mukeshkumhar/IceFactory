@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".MainActivity">
+<androidx.appcompat.widget.AppCompatImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:src="@drawable/ice1"
+    android:scaleType="centerCrop"
+    android:tint="#4DFFFFFF"
+
+    />
+
+
+
+    <TextView
+        android:id="@+id/errorTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="* Wrong username or password *"
+        android:textColor="#FF0000"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/loginCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.867" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/loginCard"
+        android:layout_width="match_parent"
+        android:layout_height="500sp"
+        android:layout_margin="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardBackgroundColor="@color/loginbgColour"
+        android:backgroundTint="#CDDEF2F1"
+        app:cardCornerRadius="10sp"
+        tools:ignore="MissingConstraints">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10sp"
+                android:text="Sri Dakshinamurthy Ice Factory"
+                android:textColor="#0BB4F4"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+
+
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_margin="15sp"
+            android:layout_gravity="center_horizontal"
+            android:text="Login" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
+                android:textColor="@color/black"
+                android:text="Username"/>
+
+            <EditText
+                android:id="@+id/loginEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15sp"
+                android:padding="10sp"
+                android:background="@drawable/edittext_background"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/black"
+                android:textColorHint="@color/textHintColour"
+                android:hint="Enter your email"
+                android:minHeight="48dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15sp"
+                android:textColor="@color/black"
+                android:text="Password"/>
+
+            <EditText
+                android:id="@+id/loginPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15sp"
+                android:padding="10sp"
+                android:background="@drawable/edittext_background"
+                android:textColor="@color/black"
+                android:textColorHint="@color/textHintColour"
+                android:hint="Enter your password"
+                android:minHeight="48dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/loginButton"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25sp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_background"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:elevation="5dp"
+                android:text="Login"/>
+            <TextView
+                android:id="@+id/logintext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"
+                android:text="If you are not Register then" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/registerPagebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="30sp"
+                android:layout_marginTop="5sp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="15sp"
+                android:text="Register"
+                android:background="@drawable/button_background"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
