@@ -82,6 +82,8 @@ class Billings : AppCompatActivity() {
     private var startDate: Date? = null
     private var endDate: Date? = null
 
+    private val lodingBar = findViewById<ProgressBar>(R.id.lodingBar)
+
 
 
 
@@ -96,6 +98,8 @@ class Billings : AppCompatActivity() {
     private val apiService by lazy {
         retrofit.create(ApiService::class.java)
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -325,7 +329,6 @@ class Billings : AppCompatActivity() {
 //        val orderHistoryResponce: OrderHistoryResponce = customerResponse?.data ?: emptyList()
 
 
-
         exportPdfButton.setOnClickListener {
             // Permission already granted, proceed with file saving
 
@@ -335,7 +338,7 @@ class Billings : AppCompatActivity() {
 //                createdAtDate?.after(startDate) == true && createdAtDate?.before(endDate) == true
 //            }
 
-
+            lodingBar.visibility = View.VISIBLE
 
                 val startDate = getStartDateFromDatePicker()
                 val endDate = getEndDateFromDatePicker()
@@ -361,6 +364,8 @@ class Billings : AppCompatActivity() {
 //                    filterOrdersByDate(orderHistoryss, startDate, endDate)  // error in this line
                 println("Filtered Orders checking : $filteredOrders")
                 createPdf(this,  filterOrderValuesByDate(orderHistoryss, startDate, endDate))
+            lodingBar.visibility = View.GONE
+
 
 
 
@@ -414,7 +419,7 @@ class Billings : AppCompatActivity() {
 
     private fun createPdf(context: Context, filteredOrders: List<OrderValue>) {
         try {
-
+            lodingBar.visibility = View.VISIBLE
 //            val nameOfPdf =
             val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
             var totalPrice = 0.0
@@ -569,11 +574,14 @@ class Billings : AppCompatActivity() {
 
             document.close()
 
+            lodingBar.visibility = View.GONE
+
             Toast.makeText(context, "PDF saved to $filePath", Toast.LENGTH_LONG).show()
             println("PDF saved to $filePath")
 
 
         } catch (e: Exception) {
+            lodingBar.visibility = View.GONE
             Toast.makeText(context, "Error creating PDF: ${e.message}", Toast.LENGTH_LONG).show()
             println("Error creating PDF: ${e.message}")
             // Handle the exception, e.g., show an error message

@@ -4,6 +4,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
 
-    const val BASE_URL = "https://ice-factory-backend.onrender.com/api/v1/"
+    const val BASE_URL = "https://ice-factory.onrender.com/api/v1/"
+
 
 }

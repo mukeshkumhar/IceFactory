@@ -249,13 +249,43 @@ class MonthlyReport : AppCompatActivity() {
         this.autoCompleteTextView.setAdapter(adapter)
     }
 
+    class MyValueFormatterkg : ValueFormatter() {
+        override fun getFormattedValue(value: Float): String {
+            return when {
+                // Assuming dataSet is for quantity (Kg) and dataSet2 is for value (Rs)
+                dataSetIndex == 0 -> " Rs ${value.toInt()}" // Add "Kg" to quantity
+                else -> value.toString() // Default formatting
+            }
+        }
+
+        // Optional: You can add a dataSetIndex property to track which dataset is being formatted
+        var dataSetIndex: Int = 0
+    }
+
+
+    class MyValueFormatter : ValueFormatter() {
+        override fun getFormattedValue(value: Float): String {
+            return when {
+                // Assuming dataSet is for quantity (Kg) and dataSet2 is for value (Rs)
+                dataSetIndex == 0 -> "${value.toInt()} Kg" // Add "Rs" to value
+                else -> value.toString() // Default formatting
+            }
+        }
+
+        // Optional: You can add a dataSetIndex property to track which dataset is being formatted
+        var dataSetIndex: Int = 0
+    }
+
+
 
 
     private fun updateChart(orders: List<Order>) {
 
         val currentMonth = Calendar.getInstance().get(Calendar.MONTH)
         val last5MonthsData = mutableListOf<BarEntry>()
-        val totalAmounts = mutableListOf<Double>()
+        val totalAmounts = mutableListOf<BarEntry>()
+        val valueFormatter = MyValueFormatter()
+        val valueFormatterKg = MyValueFormatterkg()
 
         for (i in 0 until 5) {
             val monthIndex = (currentMonth - i + 12) % 12 // Handle wrapping around to previous year
@@ -282,12 +312,13 @@ class MonthlyReport : AppCompatActivity() {
             }.sumOf { it.value }
             // Assuming 'value' is the amount property
 //            totalAmounts[4 - i.toInt()] = totalAmountForMonth.toDouble()
-            totalAmounts.add(totalAmountForMonth.toDouble())
+//            totalAmounts.add(totalAmountForMonth.toDouble())
 
             println("Total Quantity for Months: $totalQuantityForMonth")
-            println("Total Amount for Months:$totalAmounts == $totalAmountForMonth")
+            println("Total Amount for Months:$totalAmountForMonth")
 
             last5MonthsData.add(BarEntry(4 - i.toFloat(), totalQuantityForMonth.toFloat())) // 4 - i for reverse order
+            totalAmounts.add(BarEntry(4 - i.toFloat(), totalAmountForMonth.toFloat()))
 
 
 
@@ -301,8 +332,18 @@ class MonthlyReport : AppCompatActivity() {
 
         // 2. Create BarDataSet
         val dataSet = BarDataSet(last5MonthsData, "Monthly Total Orders")
+        dataSet.valueFormatter = valueFormatter
+        valueFormatter.dataSetIndex = 0
+
+        val dataSet2 = BarDataSet(totalAmounts, "Monthly Total Amount")
+        dataSet2.valueFormatter = valueFormatterKg
+        valueFormatterKg.dataSetIndex = 0
+
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS, 255)
+        dataSet2.setColors(ColorTemplate.LIBERTY_COLORS,255)
+
         dataSet.valueTextSize = 10f
+        dataSet2.valueTextSize = 10f
 
 //        val valueFormatter = object : ValueFormatter() {
 //            override fun getFormattedValue(value: Float, axis: AxisBase?): String {
@@ -320,9 +361,13 @@ class MonthlyReport : AppCompatActivity() {
 
 
         // 3. Create BarData and set it to the chart
-        val data = BarData(dataSet)
+        val data = BarData(dataSet2,dataSet)
+//        data.barWidth = 0.3f
+//        val groupSpace = 0.3f
+//        val barSpace = 0.01f
         barchart = findViewById(R.id.barChartMonthly)
         barchart.data = data
+//        barchart.groupBars(0f, groupSpace, barSpace)
 
 //        data.setValueFormatter(valueFormatter)
 

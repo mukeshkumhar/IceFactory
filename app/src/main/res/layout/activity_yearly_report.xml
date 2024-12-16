@@ -124,7 +124,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
-                    android:text="Yearly Quantity order in Kg"/>
+                    android:text="Yearly Order in Rs and Kg"/>
                 <ProgressBar
                     android:id="@+id/progressBar"
                     android:layout_width="match_parent"

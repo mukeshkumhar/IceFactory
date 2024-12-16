@@ -160,6 +160,11 @@
                     android:background="@drawable/edittext_background"
                     android:inputType="none"/>
             </com.google.android.material.textfield.TextInputLayout>
+            <ProgressBar
+                android:id="@+id/lodingBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
 
             <androidx.appcompat.widget.AppCompatButton

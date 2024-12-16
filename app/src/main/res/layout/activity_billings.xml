@@ -75,6 +75,7 @@
     </androidx.cardview.widget.CardView>
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,148 +84,160 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
         app:layout_constraintVertical_bias="0.0">
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/loginbgColour"
             android:layout_margin="8sp"
+            app:cardBackgroundColor="@color/loginbgColour"
             app:cardCornerRadius="10sp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20sp"
                 android:orientation="vertical">
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginLeft="20sp"-->
-<!--                    android:textSize="18sp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:text="Search"/>-->
+                <!--                <TextView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginLeft="20sp"-->
+                <!--                    android:textSize="18sp"-->
+                <!--                    android:textStyle="bold"-->
+                <!--                    android:text="Search"/>-->
 
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_margin="10sp"-->
-<!--                    app:cardCornerRadius="30sp"-->
-<!--                    >-->
-<!--                    <androidx.appcompat.widget.SearchView-->
-<!--                        android:id="@+id/searchTxt"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:padding="5sp"/>-->
-<!--                </androidx.cardview.widget.CardView>-->
+                <!--                <androidx.cardview.widget.CardView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_margin="10sp"-->
+                <!--                    app:cardCornerRadius="30sp"-->
+                <!--                    >-->
+                <!--                    <androidx.appcompat.widget.SearchView-->
+                <!--                        android:id="@+id/searchTxt"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:padding="5sp"/>-->
+                <!--                </androidx.cardview.widget.CardView>-->
                 <TextView
                     android:id="@+id/emailOfBilling"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20sp"
                     android:layout_marginBottom="10sp"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:text="email"
                     android:textColor="@color/black"
-                    android:text="email"/>
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_margin="10sp"-->
-<!--                    app:cardCornerRadius="30sp"-->
-<!--                    >-->
-<!--                    <androidx.appcompat.widget.SearchView-->
-<!--                        android:id="@+id/searchTxt"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        app:queryBackground="@android:color/transparent"-->
-<!--                        app:queryHint="Enter to search"-->
-<!--                        app:iconifiedByDefault="false"-->
-<!--                        android:padding="5sp"/>-->
-<!--                </androidx.cardview.widget.CardView>-->
+                <!--                <androidx.cardview.widget.CardView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_margin="10sp"-->
+                <!--                    app:cardCornerRadius="30sp"-->
+                <!--                    >-->
+                <!--                    <androidx.appcompat.widget.SearchView-->
+                <!--                        android:id="@+id/searchTxt"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        app:queryBackground="@android:color/transparent"-->
+                <!--                        app:queryHint="Enter to search"-->
+                <!--                        app:iconifiedByDefault="false"-->
+                <!--                        android:padding="5sp"/>-->
+                <!--                </androidx.cardview.widget.CardView>-->
 
                 <ProgressBar
                     android:id="@+id/progressBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycleViewBilling"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:itemCount="1"
                     android:layout_margin="5sp"
+                    tools:itemCount="1"
                     tools:listitem="@layout/customer_layout_recycleview"
                     tools:orientation="vertical" />
 
-                    <LinearLayout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20sp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/startDateTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Start Date"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <DatePicker
+                        android:id="@+id/startDatePicker"
+                        style="@style/MyDatePickerSpinnerStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="20sp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/startDateTxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textStyle="bold"
-                            android:textSize="18sp"
-                            android:textColor="@color/black"
-                            android:text="Start Date"/>
-
-                        <DatePicker
-                            android:id="@+id/startDatePicker"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:theme="@style/ThemeOverlay.AppCompat.Light"
-                            android:calendarTextColor="@color/headerColour"
-                            android:calendarViewShown="false"
-                            android:datePickerMode="spinner"
-                            style="@style/MyDatePickerSpinnerStyle"
-                            android:visibility="visible" />
+                        android:layout_weight="1"
+                        android:calendarTextColor="@color/headerColour"
+                        android:calendarViewShown="false"
+                        android:datePickerMode="spinner"
+                        android:theme="@style/ThemeOverlay.AppCompat.Light"
+                        android:visibility="visible" />
 
 
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20sp"
+                    android:orientation="vertical"
+                    android:textAlignment="textEnd">
+
+                    <TextView
+                        android:id="@+id/endDateTxt"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="End Date"
                         android:textAlignment="textEnd"
-                        android:layout_margin="20sp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:id="@+id/endDateTxt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:textStyle="bold"
-                            android:textSize="18sp"
-                            android:textAlignment="textEnd"
-                            android:textColor="@color/black"
-                            android:text="End Date"/>
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
 
+                    <DatePicker
+                        android:id="@+id/endDatePicker"
+                        style="@style/MyDatePickerSpinnerStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:calendarTextColor="@color/headerColour"
+                        android:calendarViewShown="false"
+                        android:datePickerMode="spinner"
+                        android:theme="@style/ThemeOverlay.AppCompat.Light"
+                        android:visibility="visible" />
 
-                        <DatePicker
-                            android:id="@+id/endDatePicker"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:theme="@style/ThemeOverlay.AppCompat.Light"
-                            android:layout_weight="1"
-                            android:datePickerMode="spinner"
-                            android:visibility="visible"
-                            android:calendarTextColor="@color/headerColour"
-                            style="@style/MyDatePickerSpinnerStyle"
-                            android:calendarViewShown="false"/>
-
-                    </LinearLayout>
-
-
-
+                </LinearLayout>
 
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/lodingBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/exportBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/exportBtn"

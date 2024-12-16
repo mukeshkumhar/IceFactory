@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -69,8 +71,10 @@ class RegisterPage : AppCompatActivity() {
             val name = findViewById<EditText>(R.id.registerName)
             val email = findViewById<EditText>(R.id.registerEmail)
             val password = findViewById<EditText>(R.id.registerPassword)
+            val loadingBar = findViewById<ProgressBar>(R.id.lodingBar)
 
             register.setOnClickListener {
+                loadingBar.visibility = View.VISIBLE
 
                 val Name = name.text.toString()
                 val Email = email.text.toString()
@@ -81,6 +85,7 @@ class RegisterPage : AppCompatActivity() {
                 Log.d("RegisterPage", "Name: $Name, Email: $Email, Password: $Password")
                 val user = RegisterUser(Name, Email, Password)
 
+
                 // Call the registerUser API asynchronously
                 lifecycleScope.launch {
                     try {
@@ -89,26 +94,26 @@ class RegisterPage : AppCompatActivity() {
 
                         if (response.isSuccessful && response.body() != null) {
 
-
                             val registerResponse = response.body()
 
                             println("Register Responce: $response")
 
                             if (registerResponse?.success == true) {
                                 // Handle successful registration (e.g., display a success message, navigate to login page)
-
+                                loadingBar.visibility = View.GONE
                                 Toast.makeText(
                                     this@RegisterPage,
                                     registerResponse.message,
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 // Navigate to the login activity
-                                val intent = Intent(this@RegisterPage, HomeActivity::class.java)
+                                val intent = Intent(this@RegisterPage, MainActivity::class.java)
                                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                                 startActivity(intent)
                                 finish()
                             } else {
                                 // Handle registration failure (e.g., display an error message)
+                                loadingBar.visibility = View.GONE
                                 Toast.makeText(
                                     this@RegisterPage,
                                     "Wrong email or Password",
@@ -119,6 +124,7 @@ class RegisterPage : AppCompatActivity() {
                         } else {
                             // Handle unsuccessful response
                             withContext(Dispatchers.Main) {
+                                loadingBar.visibility = View.GONE
                                 Toast.makeText(
                                     this@RegisterPage,
                                     "Register failed: ${response.message()}",
@@ -133,6 +139,7 @@ class RegisterPage : AppCompatActivity() {
                         }
                     } catch (e: Exception) {
                         // Handle network errors or other exceptions
+                        loadingBar.visibility = View.GONE
                         Toast.makeText(this@RegisterPage, "Register failed", Toast.LENGTH_SHORT)
                             .show()
                         println("Register failed: try " + "${e.message}")

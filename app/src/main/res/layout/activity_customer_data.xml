@@ -138,6 +138,11 @@
                 android:theme="@style/ThemeOverlay.AppCompat.Light"
                 android:outlineSpotShadowColor="@color/black"
                 android:visibility="visible"/>
+            <ProgressBar
+                android:id="@+id/lodingBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
 
 

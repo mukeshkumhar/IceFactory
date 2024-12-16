@@ -124,7 +124,7 @@
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:text="Monthly Quantity order in Kg"/>
+                    android:text="Monthly Order in Rs and Kg"/>
                 <ProgressBar
                     android:id="@+id/progressBar"
                     android:layout_width="match_parent"

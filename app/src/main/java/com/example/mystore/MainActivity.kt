@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -32,9 +34,8 @@ class MainActivity : AppCompatActivity() {
 
     private val apiService by lazy {
         retrofit.create(ApiService::class.java)
-
-
     }
+
     //    Server link and retrofit instance handal
 
     @SuppressLint("MissingInflatedId")
@@ -83,8 +84,10 @@ class MainActivity : AppCompatActivity() {
 //
 //            val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
             val userRepository = UserRepository(apiService, sharedPreferences)
+            val loadingBar = findViewById<ProgressBar>(R.id.lodingBar)
 
             loginBtn.setOnClickListener {
+                loadingBar.visibility = View.VISIBLE
                 val email = Email.text.toString()
                 val password = Password.text.toString()
 
@@ -120,6 +123,7 @@ class MainActivity : AppCompatActivity() {
 //                            val editor = sharedPreferences.edit()
 //                            editor.putString("authToken", LoginResponse.token)
 //                            editor.apply()
+                                loadingBar.visibility = View.GONE
                                 Toast.makeText(
                                     this@MainActivity,
                                     loginResponse.message,
@@ -134,6 +138,7 @@ class MainActivity : AppCompatActivity() {
                                 // Navigate to the home activity
                             } else {
                                 // Handle login failure (e.g., display an error message)
+                                loadingBar.visibility = View.GONE
                                 Toast.makeText(
                                     this@MainActivity,
                                     "Wrong email or Password",
@@ -145,6 +150,7 @@ class MainActivity : AppCompatActivity() {
                         } else {
                             // Handle unsuccessful response
                             withContext(Dispatchers.Main) {
+                                loadingBar.visibility = View.GONE
                                 Toast.makeText(
                                     this@MainActivity,
                                     "Login failed: ${response.message()}",
@@ -155,6 +161,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     } catch (e: Exception) {
                         // Handle network errors or other exceptions
+                        loadingBar.visibility = View.GONE
                         Toast.makeText(
                             this@MainActivity,
                             "Login failed" + "${e.message}",

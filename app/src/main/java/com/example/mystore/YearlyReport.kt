@@ -16,12 +16,15 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
+import com.example.mystore.MonthlyReport.MyValueFormatter
+import com.example.mystore.MonthlyReport.MyValueFormatterkg
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -216,12 +219,45 @@ class YearlyReport : AppCompatActivity() {
         this.autoCompleteTextView.setAdapter(adapter)
     }
 
+    class MyValueFormatterkg : ValueFormatter() {
+        override fun getFormattedValue(value: Float): String {
+            return when {
+                // Assuming dataSet is for quantity (Kg) and dataSet2 is for value (Rs)
+                dataSetIndex == 0 -> " Rs ${value.toInt()}" // Add "Kg" to quantity
+                else -> value.toString() // Default formatting
+            }
+        }
+
+        // Optional: You can add a dataSetIndex property to track which dataset is being formatted
+        var dataSetIndex: Int = 0
+    }
+
+
+    class MyValueFormatter : ValueFormatter() {
+        override fun getFormattedValue(value: Float): String {
+            return when {
+                // Assuming dataSet is for quantity (Kg) and dataSet2 is for value (Rs)
+                dataSetIndex == 0 -> "${value.toInt()} Kg" // Add "Rs" to value
+                else -> value.toString() // Default formatting
+            }
+        }
+
+        // Optional: You can add a dataSetIndex property to track which dataset is being formatted
+        var dataSetIndex: Int = 0
+    }
+
+
     private fun updateChart(orders: List<Order>) {
         val barChart = findViewById<BarChart>(R.id.barChartYearly)
 
         // 1. Get data for the last 5 years
         val currentYear = Calendar.getInstance().get(Calendar.YEAR)
         val last5YearsData = mutableListOf<BarEntry>()
+        val last5YearsValue = mutableListOf<BarEntry>()
+        val valueFormatter = MyValueFormatter()
+        val valueFormatterKg = MyValueFormatterkg()
+
+
         for (i in 0 until 5) {
             val year = currentYear - i
 
@@ -236,19 +272,37 @@ class YearlyReport : AppCompatActivity() {
                 Calendar.getInstance().apply { time = orderDate }.get(Calendar.YEAR) == year
             }.sumOf { it.quantity }
 
+            val totalValueForYear = orders.filter { order ->
+                val orderDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).parse(order.createdAt)
+                Calendar.getInstance().apply { time = orderDate }.get(Calendar.YEAR) == year
+            }.sumOf { it.value }
+
 
 
 
 
             last5YearsData.add(BarEntry(i.toFloat(),totalQuantityForYear.toFloat())) // 4 - i for reverse order
+            last5YearsValue.add(BarEntry(i.toFloat(),totalValueForYear.toFloat()))
+
+
         }
 
         // 2. Create BarDataSet
         val dataSet = BarDataSet(last5YearsData, "Yearly Total Orders")
-        dataSet.color = Color.BLUE
+        dataSet.valueFormatter = valueFormatter
+        valueFormatter.dataSetIndex = 0
+        val dataSet2 = BarDataSet(last5YearsValue, "Yearly Total Amount")
+        dataSet2.valueFormatter = valueFormatterKg
+        valueFormatterKg.dataSetIndex = 0
+//        dataSet.color = Color.BLUE
+//        dataSet2.color = Color.MAGENTA
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS, 255)
+        dataSet2.setColors(ColorTemplate.LIBERTY_COLORS,255)
+        dataSet.valueTextSize = 10f
+        dataSet2.valueTextSize = 10f
 
         // 3. Create BarData and set it to the chart
-        val data = BarData(dataSet)
+        val data = BarData(dataSet2,dataSet)
         barChart.data = data
 
         // 4. Customize chart appearance

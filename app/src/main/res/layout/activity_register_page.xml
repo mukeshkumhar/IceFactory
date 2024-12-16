@@ -127,6 +127,12 @@
                 android:minHeight="48dp"
                 android:padding="10sp" />
 
+            <ProgressBar
+                android:id="@+id/lodingBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/registerButton"
                 android:layout_width="150sp"

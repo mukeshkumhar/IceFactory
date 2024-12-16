@@ -3,9 +3,11 @@ package com.example.mystore
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -114,8 +116,10 @@ class CustomerData : AppCompatActivity() {
 
             println("Start Date: $startDate")
         }
+        val loadingBar = findViewById<ProgressBar>(R.id.lodingBar)
 
         addBtn.setOnClickListener {
+            loadingBar.visibility = View.VISIBLE
 
             val weight = customerWeight.text.toString().toDoubleOrNull()?: 0.0
             val custemerEmail = email.toString()
@@ -137,13 +141,16 @@ class CustomerData : AppCompatActivity() {
                     val response = withContext(Dispatchers.IO){apiServiceWithInterceptor.createOrder(data).execute()}
                     if (response.isSuccessful && response.body() != null) {
                         // Customer added successfully
+                        loadingBar.visibility = View.GONE
                         Toast.makeText(this@CustomerData, "Weight added!", Toast.LENGTH_SHORT).show()
                         // Optionally clear the input fields or navigate to another screen
                     } else {
                         // Handle error
+                        loadingBar.visibility = View.GONE
                         val errorMessage = response.body()?.message ?: "Failed to add Weight"
                         Toast.makeText(this@CustomerData, errorMessage, Toast.LENGTH_SHORT).show()}
                 } catch (e: Exception){
+                    loadingBar.visibility = View.GONE
                     Toast.makeText(this@CustomerData, "Error in Data Feching..: ${e.message}", Toast.LENGTH_SHORT).show()
                     println("Error in Data Feching..: ${e.message}"+"----")
                 }

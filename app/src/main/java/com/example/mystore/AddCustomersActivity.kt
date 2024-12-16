@@ -4,11 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -110,9 +112,10 @@ class AddCustomersActivity : AppCompatActivity() {
         val customerEmail = findViewById<EditText>(R.id.customerEmail)
         val categoryItem = findViewById<AutoCompleteTextView>(R.id.categoryName)
         val addCustomerBTN = findViewById<AppCompatButton>(R.id.addBtn)
+        val loadingBar = findViewById<ProgressBar>(R.id.lodingBar)
 
         addCustomerBTN.setOnClickListener {
-
+            loadingBar.visibility = View.VISIBLE
             val name = customerName.text.toString()
             val email = customerEmail.text.toString()
             val category = categoryItem.text.toString()
@@ -133,6 +136,7 @@ class AddCustomersActivity : AppCompatActivity() {
                         if (customerResponse?.success == true) {
 
                             // Customer added successfully
+                            loadingBar.visibility = View.GONE
                             Toast.makeText(
                                 this@AddCustomersActivity,
                                 customerResponse.message,
@@ -141,6 +145,7 @@ class AddCustomersActivity : AppCompatActivity() {
                             // Optionally clear the input fields or navigate to another screen
                         } else {
                             // Handle error
+                            loadingBar.visibility = View.GONE
                             val errorMessage = response.body()?.message ?: "Failed to add customer"
                             Toast.makeText(
                                 this@AddCustomersActivity,
@@ -150,6 +155,7 @@ class AddCustomersActivity : AppCompatActivity() {
                         }
                     }else {
                         withContext(Dispatchers.Main) {
+                            loadingBar.visibility = View.GONE
                             Toast.makeText(
                                 this@AddCustomersActivity,
                                 "Failed to add customer: ${response.message()}",
@@ -164,6 +170,7 @@ class AddCustomersActivity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     // Handle exception
+                    loadingBar.visibility = View.GONE
                     Toast.makeText(this@AddCustomersActivity, "Customer Added", Toast.LENGTH_SHORT).show()
                     println("AddCustomer failed: ${e.message}")
                 }

@@ -3,8 +3,10 @@ package com.example.mystore
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -63,8 +65,11 @@ class AddCategory : AppCompatActivity() {
         val categoryTxt = findViewById<EditText>(R.id.categoryTxt)
         val priceTxt = findViewById<EditText>(R.id.priceTxt)
         val addBtn = findViewById<AppCompatButton>(R.id.addBtn)
+        val lodingBar = findViewById<ProgressBar>(R.id.lodingBar)
 
         addBtn.setOnClickListener {
+
+            lodingBar.visibility = View.VISIBLE
             val name = categoryTxt.text.toString()
             val price = priceTxt.text.toString().toDoubleOrNull()?: 0.0
 
@@ -79,11 +84,13 @@ class AddCategory : AppCompatActivity() {
 
                         if (categoryResponse?.success == true) {
                             // Customer added successfully
+                            lodingBar.visibility = View.GONE
                             Toast.makeText(this@AddCategory, "New Category Added", Toast.LENGTH_SHORT)
                                 .show()
                             // Optionally clear the input fields or navigate to another screen
                         } else {
                             // Handle error
+                            lodingBar.visibility = View.GONE
                             val errorMessage = response.body()?.message ?: "Failed to add Category"
                             Toast.makeText(this@AddCategory, errorMessage, Toast.LENGTH_SHORT)
                                 .show()
@@ -91,6 +98,7 @@ class AddCategory : AppCompatActivity() {
                     } else {
                         // Handle unsuccessful response
                         withContext(Dispatchers.Main) {
+                            lodingBar.visibility = View.GONE
                             Toast.makeText(
                                 this@AddCategory,
                                 "Category not added: ${response.message()}",
@@ -105,7 +113,8 @@ class AddCategory : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     // Handle exception
-                    Toast.makeText(this@AddCategory, "Category Added", Toast.LENGTH_SHORT).show()
+                    lodingBar.visibility = View.GONE
+                    Toast.makeText(this@AddCategory, "Category Added Failed", Toast.LENGTH_SHORT).show()
                     println("AddCategory failed: ${e.message}")
                 }
             }
