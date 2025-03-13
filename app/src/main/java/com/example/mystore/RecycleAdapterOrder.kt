@@ -36,20 +36,26 @@ class RecycleAdapterOrder(private var orders: List<Order>):
         override fun onBindViewHolder(holder: CustomerViewHolder, position: Int) {
 
             val order = orders[position]
-            holder.email.text = order.customer?.email?: "Empety"
-            holder.name.text = order.customer?.fullName?: "Empety"
-            holder.category.text = order.customer?.category?.name?: "Empety"
+            holder.email.text = order.customer.email.toString()
+            holder.name.text = order.customer.fullName
+            holder.category.text = order.customer?.category?.name
             holder.weight.text = order.quantity.toString()
             holder.amount.text = order.value.toString()
             holder.cardView.setOnClickListener{
                 println("Item Clicked: ${order.customer.fullName}")
                 val context= holder.itemView.context
-                val intent = Intent(context, Billings::class.java)
-                intent.putExtra("email", order.customer.email)
-                context.startActivity(intent)
+                println(context)
+                if (context != null){
+                    val intent = Intent(context, Billings::class.java)
+                    intent.putExtra("email", order.customer.email)
+                    println(order.customer.email)
+
+                    context.startActivity(intent)
 
 
-                onItemClick?.invoke(orders[position])
+                    onItemClick?.invoke(orders[position])
+                }
+
             }
         }
 

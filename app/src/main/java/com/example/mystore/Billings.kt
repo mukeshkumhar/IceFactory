@@ -40,7 +40,6 @@ import com.itextpdf.text.Font
 import com.itextpdf.text.Image
 import com.itextpdf.text.Paragraph
 import com.itextpdf.text.Phrase
-import com.itextpdf.text.pdf.BaseFont
 import com.itextpdf.text.pdf.PdfPCell
 import com.itextpdf.text.pdf.PdfPTable
 import com.itextpdf.text.pdf.PdfWriter
@@ -52,8 +51,6 @@ import kotlin.collections.filter
 
 class Billings : AppCompatActivity() {
 
-    private val STORAGE_PERMISSION_REQUEST_CODE = 1001
-
     private lateinit var searchView: SearchView
     private lateinit var startDatePicker: DatePicker
     private lateinit var endDatePicker: DatePicker
@@ -64,25 +61,14 @@ class Billings : AppCompatActivity() {
     private lateinit var nameOfCustomer: String
 
     private lateinit var recyclerView: RecyclerView
-//    private lateinit var adapter: RecycleAdapterBilling
-    private var emailselect: String? = null
-
-    //    private lateinit var searchView: SearchView
-//    private lateinit var adapter: RecycleAdapterOrder
-//    private var billings = ArrayList<Order>()
-//
     private var orderHistoryss = ArrayList<OrderValue>()
 
     private var oorderHistorys: List<OrderValue> = emptyList()
 
-    private var nameOfEmail: String? = null
-//    private var originalOrders: List<Order> = emptyList()
-
-
     private var startDate: Date? = null
     private var endDate: Date? = null
 
-    private val lodingBar = findViewById<ProgressBar>(R.id.lodingBar)
+
 
 
 
@@ -129,57 +115,11 @@ class Billings : AppCompatActivity() {
         // Create a new apiService instance using the new Retrofit instance
         val apiServiceWithInterceptor = retrofit.create(ApiService::class.java)
 
-        recyclerView = findViewById<RecyclerView>(R.id.recycleViewBilling)
-
-        //Hide Recycler view
-
-
-
-
-
-
-
-
-
-
-
-//        searchView = findViewById<SearchView>(R.id.searchTxt)
-
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-//        addDataToList()
-
-//        adapter = RecycleAdapterBilling(billings)
-//        recyclerView.adapter = adapter
-
-//        adapter = RecycleAdapterBilling(originalOrders) { email ->
-//            emailselect = email // Save clicked email to emailselect
-//            // You can perform other actions here if needed
-//        }
-//        recyclerView.adapter = adapter
-
-        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
-
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                filterOrders(query)
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                filterOrders(newText)
-//                return true
-//            }
-//
-//        })
-
-
-//        recyclerView = findViewById<RecyclerView>(R.id.recycleViewBilling)
-
 //        recyclerView.setHasFixedSize(true)
 //        recyclerView.layoutManager = LinearLayoutManager(this)
 
+
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
 
         startDatePicker = findViewById(R.id.startDatePicker)
         endDatePicker = findViewById(R.id.endDatePicker)
@@ -194,13 +134,6 @@ class Billings : AppCompatActivity() {
             val calendar = Calendar.getInstance()
             calendar.set(year, month, dayOfMonth)
             startDate = calendar.time
-
-//            val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-//            val formattedStartDate = formatter.format(startDate)
-//            val formatterDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-//            val fformattedStartDate = formatter.parse(formattedStartDate)
-//            startDateCalendar = fformattedStartDate
-
             println("Start Date: $startDate")
         }
 
@@ -220,59 +153,12 @@ class Billings : AppCompatActivity() {
         }
 
 
-//        lifecycleScope.launch {
-//            try {
-//                val response = withContext(Dispatchers.IO) { apiServiceWithInterceptor.getOrders() }
-//                if (response.isSuccessful) {
-//                    println("Responce Sucessful: ${response.body()}")
-//                    val customerResponse = response.body()
-//                    val order = billings.addAll(customerResponse?.data ?: emptyList())
-////                    val orders = customerResponse?.data ?: emptyList()
-//                    val latestCustomers = billings.sortedByDescending { it.createdAt }
-//                    println("Latest Orders are: $latestCustomers")
-//
-//                    originalOrders = latestCustomers // Store fetched data in originalOrders
-//                    adapter = RecycleAdapterBilling(originalOrders) // Initialize adapter with original data
-//                    recyclerView.adapter = adapter
-//
-//                    withContext(Dispatchers.Main) {
-//                        adapter = RecycleAdapterBilling(latestCustomers)
-//                        adapter.updateOrders(originalOrders) // Add fetched data to originalOrders
-//                        recyclerView.adapter = adapter
-//                    }
-//
-//
-//                } else {
-//                    // Handle API error
-//                    withContext(Dispatchers.Main) {
-//                        Toast.makeText(this@Billings, "API Error", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//
-//            } catch (e: Exception) {
-//                withContext(Dispatchers.Main) {
-//                    Toast.makeText(this@Billings, "Network Error", Toast.LENGTH_SHORT).show()
-//                }
-//
-//                println("Checking Error Responce ")
-//            }
-//
-//        }
-
-//        val billingsAdapter = RecycleAdapterBilling(billings) { email ->
-//            selectedCustomerEmail = email
-//        }
 
 
-        val email = intent.getStringExtra("email")
+        val email = intent?.getStringExtra("email")
         val custemerEmail = email.toString()
         nameOfCustomer = custemerEmail
-
         val history = custemerEmail
-
-//        val emalofBilling = findViewById<TextView>(R.id.emailOfBilling)
-//        billingEmail.setText(custemerEmail)
-//        val history = "mukesh@gmail.com"
         println("Email which coming from AllOrder: $history")
 
 
@@ -297,15 +183,6 @@ class Billings : AppCompatActivity() {
 
 
 
-//                    val orders = customerResponse?.data ?: emptyList()
-//                    val latestCustomers = order.sortedByDescending { it.createdAt }
-////                    println("Latest Orders of OrderHistory are: $latestCustomers")
-//                    orderHistoryss.addAll(customerResponse?.data ?: emptyList())
-
-
-//                    oorderHistorys = latestCustomers // Store fetched data in originalOrders
-//                    adapter = RecycleAdapterOrder(originalOrders) // Initialize adapter with original data
-//                    recyclerView.adapter = adapter
 
                 } else {
                     Toast.makeText(
@@ -325,20 +202,9 @@ class Billings : AppCompatActivity() {
             }
             progressBar.visibility=View.GONE
         }
-
-//        val orderHistoryResponce: OrderHistoryResponce = customerResponse?.data ?: emptyList()
-
-
         exportPdfButton.setOnClickListener {
-            // Permission already granted, proceed with file saving
-
-
-//            val filteredOrders = OrderValue.createdAt.filter { orderValue ->
-//                val createdAtDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).parse(orderValue.createdAt)
-//                createdAtDate?.after(startDate) == true && createdAtDate?.before(endDate) == true
-//            }
-
-            lodingBar.visibility = View.VISIBLE
+            val progressBar1 = findViewById<ProgressBar>(R.id.progressBar1)
+            progressBar1.visibility = View.VISIBLE
 
                 val startDate = getStartDateFromDatePicker()
                 val endDate = getEndDateFromDatePicker()
@@ -364,20 +230,13 @@ class Billings : AppCompatActivity() {
 //                    filterOrdersByDate(orderHistoryss, startDate, endDate)  // error in this line
                 println("Filtered Orders checking : $filteredOrders")
                 createPdf(this,  filterOrderValuesByDate(orderHistoryss, startDate, endDate))
-            lodingBar.visibility = View.GONE
+            progressBar1.visibility = View.GONE
 
 
 
 
 
         }
-
-//        val billingName = nameOfEmail
-//
-//        val emailName = findViewById<TextView>(R.id.emailOfBilling)
-
-
-
         val backBTN = findViewById<ImageButton>(R.id.backBTN)
         backBTN.setOnClickListener {
             val homePage = Intent(this, AllOrders::class.java)
@@ -419,7 +278,8 @@ class Billings : AppCompatActivity() {
 
     private fun createPdf(context: Context, filteredOrders: List<OrderValue>) {
         try {
-            lodingBar.visibility = View.VISIBLE
+            val progressBar1 = findViewById<ProgressBar>(R.id.progressBar1)
+            progressBar1.visibility = View.VISIBLE
 //            val nameOfPdf =
             val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
             var totalPrice = 0.0
@@ -447,23 +307,10 @@ class Billings : AppCompatActivity() {
             // 4. Create iText Image object
             val image = Image.getInstance(byteArray, false) // false for recoverFromImageError, adjust as needed
 
-            // 5. Add image to the document
-
-                // Set image properties (position, size, etc.) if needed
-                // ...
-                // Set image properties (e.g., position and size)
             image.setAbsolutePosition(50f, 600f) // Adjust coordinates as needed
             image.scaleAbsolute(500f, 200f) // Adjust dimensions as needed
 
             document.add(image)
-
-
-
-            // Set image properties (e.g., position and size)
-//            pdfImage.setAbsolutePosition(50f, 750f) // Adjust coordinates as needed
-//            pdfImage.scaleAbsolute(100f, 100f) // Adjust dimensions as needed
-
-
 
             document.add(Paragraph("  "))
 
@@ -574,65 +421,17 @@ class Billings : AppCompatActivity() {
 
             document.close()
 
-            lodingBar.visibility = View.GONE
+            progressBar1.visibility = View.GONE
 
             Toast.makeText(context, "PDF saved to $filePath", Toast.LENGTH_LONG).show()
             println("PDF saved to $filePath")
 
 
         } catch (e: Exception) {
-            lodingBar.visibility = View.GONE
+            val progressBar1 = findViewById<ProgressBar>(R.id.progressBar1)
+            progressBar1.visibility = View.GONE
             Toast.makeText(context, "Error creating PDF: ${e.message}", Toast.LENGTH_LONG).show()
             println("Error creating PDF: ${e.message}")
-            // Handle the exception, e.g., show an error message
         }
     }
-
-
-//    private fun filterOrdersByDate(
-//        orderHistoryss: List<OrderValue>,
-//        startDate: Date,
-//        endDate: Date
-//    ): List<OrderValue> {
-//
-//        println("Checking filter by date: $orderHistoryss  ....       ....$startDate.... ....$endDate")
-//
-//        val dateFormatter = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
-//        return orderHistoryss.filter { histry ->
-//            try {
-//                val createdAtDate = dateFormatter.parse(histry.createdAt)
-//                createdAtDate?.let {
-//                    it.after(startDate) && it.before(endDate) // Include time in comparison
-//                } ?: true
-//            } catch (e: ParseException) {
-//                println("Error in FilterByDate: ${e.message}")
-//                false // Handle parsing errors
-//            }
-//
-//
-//        }
-//    }
-
-//    val filteredOrders = OrderValue.createdAt.filter { orderValue ->
-//        val createdAtDate = SimpleDateFormat(
-//            "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-//            Locale.getDefault()
-//        ).parse(orderValue.createdAt)
-//        createdAtDate?.after(startDate) == true && createdAtDate?.before(endDate) == true
-//    }
-
-
-//    private fun filterOrders(query: String?) {
-//        val filteredList = if (query.isNullOrEmpty()) {
-//            originalOrders
-//        } else {
-//            originalOrders.filter { order ->
-//                order.customer.fullName.contains(query, ignoreCase = true) ||
-//                        order.customer.email.contains(query, ignoreCase = true)
-//            }
-//        }
-//        adapter.updateOrders(filteredList) // Update adapter with filtered list
-//
-//
-//    }
 }

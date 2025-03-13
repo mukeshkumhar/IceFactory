@@ -65,7 +65,7 @@ class AddCategory : AppCompatActivity() {
         val categoryTxt = findViewById<EditText>(R.id.categoryTxt)
         val priceTxt = findViewById<EditText>(R.id.priceTxt)
         val addBtn = findViewById<AppCompatButton>(R.id.addBtn)
-        val lodingBar = findViewById<ProgressBar>(R.id.lodingBar)
+        val lodingBar = findViewById<ProgressBar>(R.id.progressBar1)
 
         addBtn.setOnClickListener {
 

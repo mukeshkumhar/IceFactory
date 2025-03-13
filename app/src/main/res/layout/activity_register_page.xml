@@ -128,7 +128,7 @@
                 android:padding="10sp" />
 
             <ProgressBar
-                android:id="@+id/lodingBar"
+                android:id="@+id/progressBar1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"/>

@@ -151,14 +151,14 @@
                     android:layout_gravity="center"
                     android:visibility="gone" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycleViewBilling"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5sp"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/customer_layout_recycleview"
-                    tools:orientation="vertical" />
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/recycleViewBilling"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="5sp"-->
+<!--                    tools:itemCount="1"-->
+<!--                    tools:listitem="@layout/customer_layout_recycleview"-->
+<!--                    tools:orientation="vertical" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -230,7 +230,7 @@
     </ScrollView>
 
     <ProgressBar
-        android:id="@+id/lodingBar"
+        android:id="@+id/progressBar1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"

@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
@@ -112,7 +111,7 @@ class AddCustomersActivity : AppCompatActivity() {
         val customerEmail = findViewById<EditText>(R.id.customerEmail)
         val categoryItem = findViewById<AutoCompleteTextView>(R.id.categoryName)
         val addCustomerBTN = findViewById<AppCompatButton>(R.id.addBtn)
-        val loadingBar = findViewById<ProgressBar>(R.id.lodingBar)
+        val loadingBar = findViewById<ProgressBar>(R.id.progressBar1)
 
         addCustomerBTN.setOnClickListener {
             loadingBar.visibility = View.VISIBLE

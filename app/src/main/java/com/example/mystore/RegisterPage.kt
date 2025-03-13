@@ -1,6 +1,5 @@
 package com.example.mystore
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -71,7 +70,7 @@ class RegisterPage : AppCompatActivity() {
             val name = findViewById<EditText>(R.id.registerName)
             val email = findViewById<EditText>(R.id.registerEmail)
             val password = findViewById<EditText>(R.id.registerPassword)
-            val loadingBar = findViewById<ProgressBar>(R.id.lodingBar)
+            val loadingBar = findViewById<ProgressBar>(R.id.progressBar1)
 
             register.setOnClickListener {
                 loadingBar.visibility = View.VISIBLE

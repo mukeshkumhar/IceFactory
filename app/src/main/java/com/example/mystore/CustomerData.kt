@@ -116,7 +116,7 @@ class CustomerData : AppCompatActivity() {
 
             println("Start Date: $startDate")
         }
-        val loadingBar = findViewById<ProgressBar>(R.id.lodingBar)
+        val loadingBar = findViewById<ProgressBar>(R.id.progressBar1)
 
         addBtn.setOnClickListener {
             loadingBar.visibility = View.VISIBLE

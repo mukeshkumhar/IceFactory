@@ -20,7 +20,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 
 
 class MainActivity : AppCompatActivity() {
@@ -84,7 +83,7 @@ class MainActivity : AppCompatActivity() {
 //
 //            val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
             val userRepository = UserRepository(apiService, sharedPreferences)
-            val loadingBar = findViewById<ProgressBar>(R.id.lodingBar)
+            val loadingBar = findViewById<ProgressBar>(R.id.progressBar1)
 
             loginBtn.setOnClickListener {
                 loadingBar.visibility = View.VISIBLE
@@ -117,7 +116,7 @@ class MainActivity : AppCompatActivity() {
                                 val editor = sharedPreferences.edit()
                                 editor.putString("AccessToken", accessToken)
                                 editor.apply()
-                                println("Access Token : $accessToken")
+//                                println("Access Token : $accessToken")
                                 // Save the token securely (e.g., using SharedPreferences)
 //                        val sharedPreferences = getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE)
 //                            val editor = sharedPreferences.edit()
